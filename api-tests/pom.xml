@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+===============================================
+הסבר כללי על הקובץ pom.xml
+===============================================
+
+זהו קובץ ההגדרות של Maven.
+
+Maven הוא כלי לניהול פרויקטים ב-Java.
+
+התפקידים העיקריים שלו:
+1. ניהול ספריות חיצוניות (Dependencies).
+2. הגדרת גרסת Java.
+3. בניית הפרויקט (Build).
+4. הרצת בדיקות אוטומטיות.
+
+בפרויקט שלנו נשתמש ב:
+Java 17
+REST Assured
+TestNG
+
+המטרה היא לבנות תשתית לבדיקות API אוטומטיות.
+
+חשוב:
+הקובץ הזה מגדיר את התשתית בלבד.
+הוא עדיין אינו מכיל בדיקות אוטומטיות.
+===============================================
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--
+    מגדיר את גרסת מבנה הקובץ של Maven.
+    -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+    פרטי הזיהוי של הפרויקט.
+
+    groupId:
+    מזהה את הקבוצה או הארגון.
+
+    artifactId:
+    השם של הפרויקט.
+
+    version:
+    גרסת הפרויקט.
+    SNAPSHOT מציין גרסת פיתוח.
+    -->
+    <groupId>com.movielibrary</groupId>
+    <artifactId>api-tests</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!--
+    הגדרות כלליות.
+
+    Java 17:
+    מגדיר את גרסת Java המשמשת לקומפילציה.
+
+    UTF-8:
+    קידוד תווים שתומך בעברית ובאנגלית.
+    -->
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--
+    Dependencies = ספריות חיצוניות.
+
+    Maven מוריד ומנהל את הספריות
+    שאנחנו צריכים בפרויקט.
+    -->
+    <dependencies>
+
+        <!--
+        REST Assured
+
+        ספריית Java לבדיקות API.
+
+        מאפשרת:
+        1. שליחת בקשות GET.
+        2. שליחת בקשות POST.
+        3. בדיקת HTTP Status Codes.
+        4. בדיקת JSON Responses.
+        5. אימות נתונים שמתקבלים מהשרת.
+
+        scope=test:
+        הספרייה נדרשת לבדיקות בלבד.
+        -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.5.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+        TestNG
+
+        Framework לניהול והרצת בדיקות Java.
+
+        מאפשר:
+        1. שימוש ב-@Test.
+        2. הרצת מספר בדיקות.
+        3. שימוש ב-Assertions.
+        4. ארגון בדיקות לקבוצות.
+        5. הפקת תוצאות בדיקה.
+        -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!--
+    Build
+
+    הגדרות לבניית הפרויקט
+    ולהרצת הבדיקות.
+    -->
+    <build>
+        <plugins>
+
+            <!--
+            Maven Compiler Plugin
+
+            אחראי על קומפילציה של קוד Java.
+
+            כלומר:
+            המרת קוד המקור לקובצי bytecode.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+
+            <!--
+            Maven Surefire Plugin
+
+            אחראי על הרצת בדיקות אוטומטיות.
+
+            כאשר מריצים:
+            mvn test
+
+            Maven משתמש בתוסף הזה
+            כדי להריץ את הבדיקות המתאימות.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
