@@ -29,4 +29,13 @@ public class ApiHealthTest {
                 .statusCode(200)
                 .body("id", equalTo(1));
     }
+    
+    @Test
+    public void shouldReturn404ForMissingPost() {
+        given()
+            .when()
+                .get("https://jsonplaceholder.typicode.com/posts/999999")
+            .then()
+                .statusCode(404);
+    }
 }
